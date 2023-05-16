@@ -1,9 +1,8 @@
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
+from django.urls import path
 
-admin.autodiscover()
+from obrasnet.views import *
 
-urlpatterns = patterns(
-    'obrasnet.views',
-    url(r'^requirements', 'requirements', name='requirements')
-)
+urlpatterns = [
+    path("", index),
+    path("requirements/", requirements)
+]

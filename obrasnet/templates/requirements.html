@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+    <section class="home-section home-fade home-full-height bg-dark-60 landing-header" id="home" data-background="{% static 'images/requirements.jfif' %}">
+        <div class="row">
+            <form action="" style="margin-top: 150px;">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <label>ORÇAMENTO</label>
+                    <div class="form-group">
+                        <input class="form-control input-lg" type="text" placeholder="Título de entrada..."/>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="30" placeholder="Conteúdo de entrada..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-lg btn-round btn-block">ENVIAR</button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-6" style="maring-top: 150px; height: 800px; border: solid 1px black">
+
+            </div>
+        </div>
+  </section>
+{% endblock %}
