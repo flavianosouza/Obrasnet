@@ -8,7 +8,10 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-3">
-            <h1 class="module-title font-alt mb-0">ORÇAMENTO</h1>
+            <h3 class="module-title font-alt mb-0">
+                {{ title }}
+            </h3>
+            <div class="module-subtitle font-serif large-text">{{ content }}</div>
           </div>
         </div>
       </div>
@@ -19,13 +22,13 @@
           <div class="col-sm-8 col-sm-offset-2">
             <h4 class="font-alt mb-0">ORÇAMENTO</h4>
             <hr class="divider-w mt-10 mb-20">
-            <form class="form" role="form" action="/design_recommendations" method="POST">
+            <form class="form" role="form" action="" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <input class="form-control input-lg" type="text" name="title" placeholder="Título de entrada..." value="False plasterboard ceilings Zone: Lisbon"/>
+                    <input class="form-control input-lg" type="text" placeholder="Título de entrada..." value="False plasterboard ceilings Zone: Lisbon"/>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="15" name="content" placeholder="Conteúdo de entrada...">Article/ describe your project as much as possible (200/2000 chars):I'm from Lisbon and I want to install a false ceiling in my living room (36m2), suite (18m2) and bedroom (15m2). The suite and the bedroom are quite rectangular but the living room is relatively cornered. I was presented with a budget that really deviates from the values spoken here and, for me, it is not guaranteed. As such, anyone who does this type of work in the Lisbon area should contact me as I am very interested in hearing proposals.</textarea>
+                    <textarea class="form-control" rows="20" placeholder="Conteúdo de entrada...">Article/ describe your project as much as possible (200/2000 chars):I'm from Lisbon and I want to install a false ceiling in my living room (36m2), suite (18m2) and bedroom (15m2). The suite and the bedroom are quite rectangular but the living room is relatively cornered. I was presented with a budget that really deviates from the values spoken here and, for me, it is not guaranteed. As such, anyone who does this type of work in the Lisbon area should contact me as I am very interested in hearing proposals.</textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-success btn-lg btn-round btn-block" type="submit">ENVIAR</button>

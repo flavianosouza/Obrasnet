@@ -85,7 +85,7 @@ a,
 .panel-group .panel,
 .nav-tabs > li > a,
 .nav-pills > li > a {
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .pr-remove {
@@ -813,12 +813,12 @@ a,
 /* Forms common style */
 .form-control {
   font-family: "Roboto Condensed", sans-serif;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 2px;
-  font-size: 11px;
+  font-size: 12px;
   height: 33px;
   border: 1px solid #EAEAEA;
-  border-radius: 2px;
+  border-radius: 5px;
   transition: all 0.4s ease-in-out 0s;
 }
 
