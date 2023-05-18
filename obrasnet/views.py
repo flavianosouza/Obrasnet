@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.staticfiles import finders
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+# from obrasnet.forms import RegisterForm
 
 from openpyxl import load_workbook
 
@@ -14,18 +19,51 @@ def index(request):
 
 # Login, Logout, Register page
 
+## Register
+def register(request, *args, **kwargs):
+    if request.method == 'POST':
+        username = request.POST['username']
+        first_name = request.POST['fname']
+        last_name = request.POST['lname']
+        email = request.POST['email']
+        password = request.POST['pass1']
+
+        myuser = User.objects.create_user(username, email, password)
+        myuser.first_name = first_name
+        myuser.last_name = last_name
+
+        myuser.save()
+
+        messages.success(request, "Your account has been successfully created.")
+        
+        return redirect('signin')
+
+    return render(request, 'auth/register.html')
+
 ## Login
-def login(request):
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return render(request, 'index.html', {'username': user.username})
+        else:
+            messages.error(request, 'Invalid username or password')
+        
     return render(request, 'auth/login.html')
 
-## Logout
-def logout(request):
-    logout(request)
-    return redirect('/')
 
-## Register
-def register(request):
-    return render(request, 'register.html')
+## Logout
+def signout(request):
+    logout(request)
+
+    messages.success(request, "Log out successfully")
+
+    return redirect('home')
 
 # Create a new Requirement for url '/requirements'
 ## In this, client makes a reqruirement for the design.
@@ -45,6 +83,7 @@ def design_recommendations(request):
         }
 
         return render(request, "design_recommendations.html", data)
+
 
 # Update Scrapping Material Datas in material table
 ## In Excel, last column is state of material. 0: deleted, 1: existed, 2: created

@@ -3,13 +3,13 @@ from django.urls import path
 from obrasnet.views import *
 
 urlpatterns = [
-    path("", index),
+    path("", index, name='home'),
 
-    path("/login", login),
-    path("/logout", logout),
-    path("/register", register),
+    path("signin/", signin, name='signin'),
+    path("signout/", signout, name='signout'),
+    path("register/", register, name='register'),
 
-    path("requirements/", requirements),
-    path("design_recommendations", design_recommendations),
-    path("scrap/", scrap_history),
+    path("requirements/", requirements, name='requirements'),
+    path("design_recommendations", design_recommendations, name='design_recommendations'),
+    path("scrap/", scrap_history, name='scrap_history'),
 ]

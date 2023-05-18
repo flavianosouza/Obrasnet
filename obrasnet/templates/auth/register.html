@@ -1,0 +1,89 @@
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <section class="module bg-dark-30" data-background="{% static 'images/login.jpg' %}">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h1 class="module-title font-alt mb-0">Register</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="module">
+      <div class="container">
+        <div class="row">
+          <form class="form" action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <!-- <div class="col-sm-5 col-sm-offset-1 mb-sm-40">
+              <div class="form-group">
+                <input class="form-control" id="username" type="text" name="username" placeholder="Username" required/>
+              </div>
+              
+              <div class="form-group">
+                <input class="form-control" id="fname" type="text" name="fname" placeholder="First Name" required/>
+              </div>
+
+              <div class="form-group">
+                <input class="form-control" id="lname" type="text" name="lname" placeholder="Last Name" required/>
+              </div>
+            </div>
+            <div class="col-sm-5 mb-sm-40">
+              <div class="form-group">
+                <input class="form-control" id="E-mail" type="email" name="email" placeholder="Email" required/>
+              </div>
+              
+              <div class="form-group">
+                <input class="form-control" id="pass1" type="password" name="pass1" placeholder="Password" required/>
+              </div>
+
+              <div class="form-group">
+                <input class="form-control" id="pass2" type="password" name="pass2" placeholder="Confirm Password"/>
+              </div>
+            </div> -->
+            <div class="col-sm-6 col-sm-offset-3 mb-sm-40">
+              <div class="form-group">
+                <input class="form-control" id="username" type="text" name="username" placeholder="Username" required/>
+              </div>
+              
+              <div class="row">
+                <div class="col-sm-6 mb-sm-40">
+                  <div class="form-group">
+                    <input class="form-control" id="fname" type="text" name="fname" placeholder="First Name" required/>
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-sm-40">
+                  <div class="form-group">
+                    <input class="form-control" id="lname" type="text" name="lname" placeholder="Last Name" required/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <input class="form-control" id="E-mail" type="email" name="email" placeholder="Email" required/>
+              </div>
+              
+              <div class="form-group">
+                <input class="form-control" id="pass1" type="password" name="pass1" placeholder="Password" required/>
+              </div>
+
+              <div class="form-group">
+                <input class="form-control" id="pass2" type="password" name="pass2" placeholder="Confirm Password"/>
+              </div>
+              
+              <div class="form-group">
+                <button class="btn btn-success btn-block btn-round btn-lg" type="submit">Register</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- <hr class="divider-d"> -->
+    {% include 'layouts/footer.html' %}
+</div>
+{% endblock %}

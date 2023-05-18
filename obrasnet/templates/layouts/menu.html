@@ -1,6 +1,20 @@
 <ul class="nav navbar-nav navbar-right">
-    <li><a href="/">Home</a></li>
-    <li><a href="/requirements">Orçamento</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'requirements' %}">Orçamento</a></li>
+
+    {% if user.is_authenticated %}
     <li><a href="/scrap">Scrap</a></li>
-    <li><a href="/login">Login</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <span class="icon-profile-male" aria-hidden="true"></span> {{ user.username }}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="{% url 'signout' %}">Logout</a></li>
+        </ul>
+    </li>
+    {% else %}
+    <li><a href="/signin">Login</a></li>
+    {% endif %}
+
 </ul>

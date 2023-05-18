@@ -1,5 +1,6 @@
 from django.db import models
 # from django_mysql.models import ListCharField
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 # Create your models here.
 
@@ -92,4 +93,3 @@ class Design(models.Model):
 
     def __str__(self):
         return self.title
-    
