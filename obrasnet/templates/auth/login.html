@@ -17,6 +17,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-3 mb-sm-40">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %} alert-danger {% elif message.tags == 'success' %} alert-success {% endif %}" role="alert">
+              <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <i class="icon-envelope"></i>
+              {{ message }}
+            </div>
+            {% endfor %}
             <form class="form" action="{% url 'signin' %}" method="POST">
                 {% csrf_token %}
               <div class="form-group">
