@@ -1,6 +1,5 @@
 from django.db import models
-# from django_mysql.models import ListCharField
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -93,3 +92,49 @@ class Design(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Expert(models.Model):
+    expert = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    name = models.CharField(max_length=150)
+    use_state = models.BooleanField(default=0)
+
+class ExpertChat(models.Model):
+    expert = models.ForeignKey(
+        'Expert',
+        on_delete=models.CASCADE
+    )
+    client = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    send_type = models.BooleanField(default=0)  # 0: expert->client, 1: client->expert
+    room_name = models.CharField(max_length=100, db_index=True)
+    message = models.TextField(null=True)
+    type = models.SmallIntegerField(default=0)
+    
+    send_time = models.DateTimeField(auto_now_add=True)
+    receive_time = models.DateTimeField(null=True)
+
+class UserChat(models.Model):
+    user1 = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='chat_user1'
+    )
+    user2 = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='chat_user2'
+    )
+
+    send_type = models.BooleanField(default=0)  # 0: user1->user2, 1: user2->user1
+    room_name = models.CharField(max_length=100, db_index=True)
+    message = models.TextField(null=True)
+    type = models.SmallIntegerField(default=0)
+    
+    send_time = models.DateTimeField(auto_now_add=True)
+    receive_time = models.DateTimeField(null=True)
