@@ -3,6 +3,12 @@
 {% load static %}
 
 {% block content %}
+<style type="text/css">
+    .messages {
+        font-size: 9px;
+        font-style: italic; 
+    }
+</style>
 <div class="main">
     <section class="module-small bg-dark">
         <div class="row">
@@ -14,10 +20,9 @@
                     </div>
                     <div>
                         <div class="work-details">
-                            <h5 class="work-details-title font-alt">{{ expert.name }}-{{expert.position}}</h5>
-                            <p>
-                                {{ expert.description }}
-                            </p>
+                            <h4 class="text-center">
+                                {{ expert.name }}   -    {{expert.position}}
+                            </h4>
                             <ul>
                             <li><strong>Client: </strong><span class="font-serif"><a href="#" target="_blank">SomeCompany</a></span>
                             </li>
@@ -31,7 +36,8 @@
                 </div>
             </div>
             <div class="col-sm-7" style="height: 90vh;">
-                <div style="height: 80%;" class="module bg-light">
+                <div class="module bg-dark-30" style="height: 80%; overflow-y: auto;" id="id_content">
+                    
                 </div>
                 <form action="#" class="form">
                     <div class="row">
@@ -40,7 +46,7 @@
                             <input type="text" name="message" id="message" class="form-control input-lg" placeholder="Send Message...">
                         </div>
                         <div class="col-sm-2 text-right">
-                            <button type="submit" class="btn btn-primary btn-lg btn-round btn-block">Send</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-round btn-block" id="send_btn">Send</button>
                         </div>
                     </div>
                 </form>
@@ -58,25 +64,117 @@
 </script>
 
 <script>
+    const send_message = function(message, time) {
+        html = '';
+        html += '<div class="col-sm-4 col-sm-offset-8">';
+        html += '<div class="alert alert-info">';
+        html += message;
+        html += '</div>';
+        html += '<p class="text-right messages">';
+        html += time;
+        html += '</p>';
+        html += '</div>';
+
+        return html;
+    }
+
+    const receive_message = function(message, time) {
+        html = '';
+        html += '<div class="col-sm-4">';
+        html += '<div class="alert alert-success">';
+        html += message;
+        html += '</div>';
+        html += '<p class="text-right messages">';
+        html += time;
+        html += '</p>';
+        html += '</div>';
+
+        return html;
+    }
+
     const expert_id = JSON.parse(document.getElementById('json-roomname').textContent).expert;
     const user_id = JSON.parse(document.getElementById('json-roomname').textContent).user;
 
-    const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/ws/'
-        + expert_id
-        + '/'
-        + user_id
-        + '/'
-    );
+    // const chatSocket = new WebSocket(
+    //     'ws://'
+    //     + window.location.host
+    //     + '/ws/'
+    //     + expert_id
+    //     + '/'
+    //     + user_id
+    //     + '/'
+    // );
 
-    chatSocket.onmessage = function(e) {
-        console.log('onmessage');
-    }
+    // chatSocket.onmessage = function(e) {
+    //     console.log('onmessage');
+    // }
 
-    chatSocket.onclose = function(e) {
-        console.log("onclose");
-    }
+    // chatSocket.onclose = function(e) {
+    //     console.log("onclose");
+    // }
+
+    let messages = [
+        'Hello',
+        'Fine, thank you. and you?',
+        'I am preparing template for the project.',
+        'Thank you.',
+        'See you soon',
+        'Bye'
+    ];
+
+    let count = 0;
+    
+    $(document).ready(function() {
+        $('#send_btn').click(function(e) {
+            e.preventDefault();
+
+            let message = $('#message').val();
+            let date = new Date();
+            let time = date.getHours()+":"+date.getMinutes();
+
+            let html = send_message(message, time);
+
+            $('#id_content').append(html);
+
+            $('#message').val('');
+
+            let t1 = setInterval(function() {
+                date = new Date();
+                html = receive_message(messages[count], date.getHours()+":"+date.getMinutes());
+                $('#id_content').append(html);
+                count++;
+            }, 3000);
+
+            let t2 = setInterval(clearInterval(t1), 5000);
+        });
+    });
+
+    // document.getElementById('send_btn').addEventListener('click', function (e) {
+    //     e.preventDefault();
+
+    //     let message = document.getElementById('message').value;
+    //     let time = Date.now("Y-m-d H:i:s");
+
+    //     let html = send_message(message, time);
+
+    //     document.getElementById('id_content').appendChild(html);
+
+    //     document.getElementById('message').value = '';
+        
+    //     let t1 = setInterval(function() {
+    //         html += receive_message('Hello.', Date.now("Y-m-d H:i:s"));
+    //         document.getElementById('id_content').innerHTML = html;
+    //     }, 3000);
+
+    //     settimeout(clearInterval(t1), 4000);
+
+    //     // t1 = setInterval(function() {
+    //     //     html += receive_message('Fine, thank you. and you?', Date.now("Y-m-d H:i:s"));
+    //     //     document.getElementById('id_content').innerHTML = html;
+    //     // }, 10000);
+
+    //     // settimeout(clearInterval(t1), 11000);
+    // });
+
 </script>
 {% endblock %}

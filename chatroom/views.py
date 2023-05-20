@@ -24,7 +24,7 @@ def expert_list(request):
 def expert_chat(request, expert_id, user_id):
 
     expert = Expert.objects.get(id=expert_id)
-    
+
     return render(request, 'expert_chat.html', { 'expert': expert })
 
 # Chatting page for users
