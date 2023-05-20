@@ -1,0 +1,82 @@
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <section class="module-small bg-dark">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <div class="row">
+                    <div>
+                        <img src="{% static 'upload/experts/empty_expert.png' %}" alt="User Image"/>
+                    </div>
+                    <div>
+                        <div class="work-details">
+                            <h5 class="work-details-title font-alt">{{ expert.name }}-{{expert.position}}</h5>
+                            <p>
+                                {{ expert.description }}
+                            </p>
+                            <ul>
+                            <li><strong>Client: </strong><span class="font-serif"><a href="#" target="_blank">SomeCompany</a></span>
+                            </li>
+                            <li><strong>Date: </strong><span class="font-serif"><a href="#" target="_blank">19 May, 2023</a></span>
+                            </li>
+                            <li><strong>Online: </strong><span class="font-serif"><a href="#" target="_blank">www.example.com</a></span>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7" style="height: 90vh;">
+                <div style="height: 80%;" class="module bg-light">
+                </div>
+                <form action="#" class="form">
+                    <div class="row">
+                        <br>
+                        <div class="form-group col-sm-10">
+                            <input type="text" name="message" id="message" class="form-control input-lg" placeholder="Send Message...">
+                        </div>
+                        <div class="col-sm-2 text-right">
+                            <button type="submit" class="btn btn-primary btn-lg btn-round btn-block">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <hr class="divider-d">
+    {% include 'layouts/footer.html' %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="application/json" id="json-roomname">
+    {"expert": "{{ expert.id }}", "user": "{{ user.id }}"}
+</script>
+
+<script>
+    const expert_id = JSON.parse(document.getElementById('json-roomname').textContent).expert;
+    const user_id = JSON.parse(document.getElementById('json-roomname').textContent).user;
+
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/'
+        + expert_id
+        + '/'
+        + user_id
+        + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        console.log('onmessage');
+    }
+
+    chatSocket.onclose = function(e) {
+        console.log("onclose");
+    }
+</script>
+{% endblock %}

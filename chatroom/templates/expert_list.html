@@ -1,0 +1,59 @@
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <section class="module bg-dark-30 about-page-header" data-background="{% static 'images/chat.jpg' %}">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+              <h1 class="module-title font-alt mb-0">Especialista Bater Papo</h1>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="module-small bg-dark">
+        <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="filter font-alt" id="filters">
+                  <li><a class="current wow fadeInUp" href="#" data-filter="*">All</a></li>
+                  {% for pos in positions %}
+                  <li><a class="wow fadeInUp" href="#" data-filter=".{{ pos }}" data-wow-delay="0.2s">{{ pos }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <ul class="works-grid works-grid-gut works-hover-w works-grid-4" id="works-grid">
+            {% for pos in positions %}
+            {% for expert in experts %}
+                {% if expert.position == pos %}
+                <li class="work-item {{ pos }}">
+                    <a href="{% url 'expert_chat' expert.id user.id %}">
+                        <div class="work-image">
+                            <img
+                                {% if expert.image is None %} 
+                                src="{% static 'upload/experts/empty_expert.png' %}"
+                                {% else %}
+                                src = "{% static 'upload/experts/'  %}/{{expert.image}}"
+                                {% endif %} 
+                                alt="Portfolio Item"
+                            />
+                        </div>
+                        <div class="work-caption font-alt">
+                        <h3 class="work-title">{{ expert.name }}</h3>
+                        <div class="work-descr">{{ expert.position }}</div>
+                        </div>
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    </section>
+    <hr class="divider-d">
+    {% include 'layouts/footer.html' %}
+</div>
+{% endblock %}
