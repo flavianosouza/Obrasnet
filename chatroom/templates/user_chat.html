@@ -1,0 +1,22 @@
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <section class="module bg-dark-30 about-page-header" data-background="{% static 'images/chat.jpg' %}">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+              <h1 class="module-title font-alt mb-0">Utilizador Bater Papo</h1>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="module-small bg-dark">
+        
+    </section>
+    <hr class="divider-d">
+    {% include 'layouts/footer.html' %}
+</div>
+{% endblock %}

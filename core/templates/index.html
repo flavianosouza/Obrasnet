@@ -1,0 +1,44 @@
+{% extends 'layouts/app.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'layouts/slider.html' %}
+
+<div class="main">
+    <section class="module" id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <h2 class="module-title font-alt">Done For You</h2>
+            <div class="module-subtitle font-serif large-text">We have standards.</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2 col-sm-offset-5">
+            <div class="large-text align-center">
+                <a class="section-scroll" href="#services"><i class="fa fa-angle-down"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <hr class="divider-w">
+    
+    <hr class="divider-d">
+    <footer class="footer bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <p class="copyright font-alt">&copy; 2023&nbsp;<a href="/">Obrasnet</a></p>
+          </div>
+          <div class="col-sm-6">
+            <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'layouts/app.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="main">
+    <section class="module bg-dark-30" data-background="{% static 'images/login.jpg' %}">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <h1 class="module-title font-alt mb-0">Login</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="module">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3 mb-sm-40">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %} alert-danger {% elif message.tags == 'success' %} alert-success {% endif %}" role="alert">
+              <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <i class="icon-envelope"></i>
+              {{ message }}
+            </div>
+            {% endfor %}
+            <form class="form" action="{% url 'signin' %}" method="POST">
+                {% csrf_token %}
+              <div class="form-group">
+                <input class="form-control" id="username" type="text" name="username" placeholder="Email"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control" id="password" type="password" name="password" placeholder="Password"/>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-success btn-round btn-block" type="submit">Login</button>
+              </div>
+              <div class="form-group">
+                <a class="btn btn-primary btn-round btn-block" href="{% url 'signup' %}">Register</a>
+              </div>
+              <div class="form-group text-center"><a href="">Forgot Password?</a></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr class="divider-d">
+    {% include 'layouts/footer.html' %}
+</div>
+{% endblock %}

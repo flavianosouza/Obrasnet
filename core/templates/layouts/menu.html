@@ -1,0 +1,28 @@
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'home' %}">Início</a></li>
+    <li><a href="{% url 'requirements' %}">Orçamento</a></li>
+
+    {% if user.is_authenticated %}
+    <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            Bater Papo
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'expert_list' %}">Especialista</a></li>
+          <li><a href="{% url 'user_chat' %}">Utilizador</a></li>
+        </ul>
+    </li>
+    <li><a href="/scrap">Scrap</a></li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+            <span class="icon-profile-male" aria-hidden="true"></span> {{ user.username }}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Profile</a></li>
+          <li><a href="{% url 'signout' %}">Logout</a></li>
+        </ul>
+    </li>
+    {% else %}
+    <li><a href="/signin">Login</a></li>
+    {% endif %}
+</ul>
