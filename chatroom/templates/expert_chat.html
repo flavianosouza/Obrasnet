@@ -16,7 +16,15 @@
             <div class="col-sm-3">
                 <div class="row">
                     <div>
-                        <img src="{% static 'upload/experts/empty_expert.png' %}" alt="User Image"/>
+                        <img
+                            {% if expert.image is None %} 
+                            src="{% static 'upload/experts/empty_expert.png' %}"
+                            {% else %}
+                            src = "{% static 'upload/experts/' %}/{{expert.image}}"
+                            {% endif %} 
+                            alt="Portfolio Item"
+                            style="width: 100%;"
+                        />
                     </div>
                     <div>
                         <div class="work-details">
@@ -36,7 +44,7 @@
                 </div>
             </div>
             <div class="col-sm-7" style="height: 90vh;">
-                <div class="module bg-dark-30" style="height: 80%; overflow-y: auto;" id="id_content">
+                <div class="module bg-dark-30" style="height: 750px; overflow-y: auto;" id="id_content">
                     
                 </div>
                 <form action="#" class="form">
@@ -69,10 +77,10 @@
         html += '<div class="col-sm-4 col-sm-offset-8">';
         html += '<div class="alert alert-info">';
         html += message;
-        html += '</div>';
-        html += '<p class="text-right messages">';
+        html += '<span class="text-right messages">';
         html += time;
-        html += '</p>';
+        html += '</span>';
+        html += '</div>';
         html += '</div>';
 
         return html;
@@ -83,10 +91,10 @@
         html += '<div class="col-sm-4">';
         html += '<div class="alert alert-success">';
         html += message;
-        html += '</div>';
-        html += '<p class="text-right messages">';
+        html += '<span class="text-right messages">';
         html += time;
-        html += '</p>';
+        html += '</span>';
+        html += '</div>';
         html += '</div>';
 
         return html;
@@ -145,7 +153,9 @@
                 count++;
             }, 3000);
 
-            let t2 = setInterval(clearInterval(t1), 5000);
+            let t2 = setTimeout(function() {
+                clearInterval(t1)
+            }, 5000);
         });
     });
 

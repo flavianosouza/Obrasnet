@@ -12,7 +12,7 @@
           <li><a href="{% url 'user_chat' %}">Utilizador</a></li>
         </ul>
     </li>
-    <li><a href="/scrap">Scrap</a></li>
+    <li><a href="{% url 'scrap_history' %}">Scrap</a></li>
     <li class="dropdown">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">
             <span class="icon-profile-male" aria-hidden="true"></span> {{ user.username }}
